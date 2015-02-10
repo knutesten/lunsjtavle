@@ -21,6 +21,8 @@ class ReportRoute extends Actor with ReportRouteTrait {
 }
 
 trait ReportRouteTrait extends HttpService with SprayJsonSupport {
+  import no.mesan.lunsjtavle.model.RegistrationJsonProtocol._
+
   val report = {
     path(IntNumber) { (userId) =>
       parameters('start.as[Int], 'end.as[Int]) { (start, end) =>

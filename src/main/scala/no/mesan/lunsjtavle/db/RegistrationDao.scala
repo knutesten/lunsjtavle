@@ -27,10 +27,10 @@ object RegistrationDao {
   }
 
   def getRegistrations(userId: Int, start: Timestamp, end: Timestamp): List[Registration] = H2.database.withSession { implicit session =>
-    val join = for {
+    val report = for {
       r <- registrations if r.userId === userId && r.date >= start && r.date <= end
     } yield r
-    join.list
+    report.list
   }
 
   def all : List[Registration] = H2.database.withSession { implicit session =>
