@@ -6,6 +6,7 @@ package no.mesan.lunsjtavle.db
 
 
 import org.apache.commons.dbcp2.BasicDataSource
+import org.h2.tools.Server
 
 import scala.slick.driver.H2Driver.simple._
 
@@ -17,4 +18,7 @@ object H2 {
     dataSource.setDriverClassName("org.h2.Driver")
     Database.forDataSource(dataSource)
   }
+
+  Server.createTcpServer().start()
+  Server.createWebServer().start()
 }

@@ -1,4 +1,4 @@
 For å kjøre opp:
-sbt run
+# sbt run
 
 (Krever da sbt installert, samt scala selvsagt)

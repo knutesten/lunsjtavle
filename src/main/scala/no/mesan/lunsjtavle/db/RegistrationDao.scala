@@ -1,6 +1,8 @@
 package no.mesan.lunsjtavle.db
 
-import no.mesan.lunsjtavle.model.{Registration, Registrations}
+import java.sql.Timestamp
+
+import no.mesan.lunsjtavle.model.{Users, Registration, Registrations}
 
 import scala.slick.driver.H2Driver.simple._
 
@@ -22,6 +24,13 @@ object RegistrationDao {
 
   def delete(id: Int) = H2.database.withSession { implicit session =>
     byId(id).delete
+  }
+
+  def getRegistrations(userId: Int, start: Timestamp, end: Timestamp): List[Registration] = H2.database.withSession { implicit session =>
+    val join = for {
+      r <- registrations if r.userId === userId && r.date >= start && r.date <= end
+    } yield r
+    join.list
   }
 
   def all : List[Registration] = H2.database.withSession { implicit session =>
